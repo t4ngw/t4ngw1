@@ -1,2 +1,57 @@
-import numpy as np
-improt
+color = {}
+pi = {}
+d = {}
+G = {'S':('R','W'),
+'W':('S','T', 'X'),
+'R':('S','V'),
+'V':('R'),
+'T':('U','W', 'X'),
+'X':('W','T', 'U', 'Y'),
+'U':('T','X', 'Y'),
+'Y':('X','V'),
+}
+def main():
+    BFS(G, 'S')
+    print(color)
+    print(pi)
+    print(d)
+def BFS(G, s):
+
+    global color, pi, d, Q
+    for v in G:
+        color[v] = 'white'
+        pi[v] = 'NIL'
+        d[v] = float('inf')
+    color[s] = 'gray'
+    pi[s] = 'NIL'
+    d[s] =0
+    Q = 5*['0']
+    ENQUEUE(Q, s)
+    while(Qhead != Qtail):
+        u = DEQUEUE(Q)
+        for v in G[u]:
+            if color[v] == 'white':
+                color[v] = 'gray'
+                d[v] = d[u] + 1
+                pi[v] = u
+                ENQUEUE(Q, v)
+        color[u] = 'black'
+def ENQUEUE(Q, x):
+    global Qtail
+    Q[Qtail] = x
+    if Qtail == len(Q) - 1:
+        Qtail = 0
+    else:
+        Qtail = Qtail + 1
+def DEQUEUE(Q):
+    global Qhead
+    x = Q[Qhead]
+    if Qhead == len(Q) - 1:
+        Qhead = 0
+    else:
+        Qhead = Qhead + 1
+    return x
+
+Qhead = 0
+Qtail = 0
+main()
